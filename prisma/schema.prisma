@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model wallets {
+  id        String       @id @default(uuid())
+  userId    String  @db.VarChar(255) @unique
+  balanceKobo   BigInt  @default(0)
+  currency  String   @db.VarChar(255) @default("NGN")
+  createdAt DateTime? @default(now()) @db.Timestamp(6)
+  updatedAt DateTime? @default(now()) @db.Timestamp(6)
+}
+  
