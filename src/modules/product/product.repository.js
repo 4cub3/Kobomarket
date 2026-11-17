@@ -9,6 +9,14 @@ class ProductRepository {
         return product;
     }
 
+    static async findProductById(id) {
+        return Product.findById(id).lean();
+    }
+
+    static async findProductsByIds(ids) {
+        return Product.find({ _id: { $in: ids } }).lean();
+    }
+
     static async findProducts({ q, category, vendorId, minPrice, maxPrice, minRating, sort, limit, after }) {
         const { field, dir } = SORTS[sort];
         const query = { isActive: true, isDeleted: false };
